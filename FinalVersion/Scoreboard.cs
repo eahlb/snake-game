@@ -32,10 +32,22 @@ namespace FinalVersion
 
         private int GetHighscore()
         {
-            StreamReader sr = new StreamReader("highscore.txt");
-            int i = int.Parse(sr.ReadLine());
-            sr.Close();
-            return i;
+            string fname = "highscore.txt";
+            if (File.Exists(fname))
+            {
+                StreamReader sr = new StreamReader(fname);
+                int i = int.Parse(sr.ReadLine());
+                sr.Close();
+                return i;
+            }
+            else
+            {
+                // create new file
+                StreamWriter sw = new StreamWriter(fname);
+                sw.WriteLine("0");
+                sw.Close();
+                return 0;
+            }
         }
 
         public void SaveScore()
